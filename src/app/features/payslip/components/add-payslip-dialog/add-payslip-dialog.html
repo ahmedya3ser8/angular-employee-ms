@@ -1,0 +1,104 @@
+<p-dialog [modal]="true" [draggable]="false" [visible]="visible()" [style]="{ width: '28rem' }">
+
+  <ng-template #header>
+    <h3 class="font-medium text-[#0F172B]"> Generate Monthly Payslip </h3>
+  </ng-template>
+
+  <form [formGroup]="payslipForm" (ngSubmit)="submitForm()" class="flex flex-col gap-5">
+
+    <div class="space-y-2">
+      <label for="employee" class="label"> Employee </label>
+      <p-select
+        id="employee"
+        [options]="employees()"
+        formControlName="employee"
+        optionLabel="fullName"
+        optionValue="_id"
+        class="w-full bg-[#f8fafc80]! border border-[#E2E8F0]! items-center p-1"
+      />
+      @if (payslipForm.get('employee')?.errors && payslipForm.get('employee')?.touched) {
+        @if (payslipForm.get('employee')?.getError('required')) {
+          <p class="text-rose-500 text-sm lowercase"> employee is required </p>
+        }
+      }
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-5">
+
+      <div class="space-y-2">
+        <label for="month" class="label"> Month </label>
+        <p-select
+          id="month"
+          [options]="monthList"
+          formControlName="month"
+          class="w-full bg-[#f8fafc80]! border border-[#E2E8F0]! items-center p-1"
+        />
+        @if (payslipForm.get('month')?.errors && payslipForm.get('month')?.touched) {
+          @if (payslipForm.get('month')?.getError('required')) {
+            <p class="text-rose-500 text-sm lowercase"> month is required </p>
+          }
+        }
+      </div>
+
+      <div class="space-y-2">
+        <label for="year" class="label"> Year </label>
+        <p-select
+          id="year"
+          [options]="yearList"
+          formControlName="year"
+          class="w-full bg-[#f8fafc80]! border border-[#E2E8F0]! items-center p-1"
+        />
+        @if (payslipForm.get('year')?.errors && payslipForm.get('year')?.touched) {
+          @if (payslipForm.get('year')?.getError('required')) {
+            <p class="text-rose-500 text-sm lowercase"> year is required </p>
+          }
+        }
+      </div>
+
+    </div>
+
+    <app-input
+      [id]="'basicSalary'"
+      [label]="'Basic Salary'"
+      [type]="'number'"
+      formControlName="basicSalary"
+      [control]="payslipForm.get('basicSalary')"
+      [placeholder]="'5000'"
+      [errors]="{
+        'required': 'basicSalary is required'
+      }"
+    />
+
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-5">
+      <app-input
+        [id]="'allowances'"
+        [label]="'Allowances'"
+        [type]="'number'"
+        formControlName="allowances"
+        [control]="payslipForm.get('allowances')"
+        [placeholder]="'0'"
+      />
+      <app-input
+        [id]="'deductions'"
+        [label]="'Deductions'"
+        [type]="'number'"
+        formControlName="deductions"
+        [control]="payslipForm.get('deductions')"
+        [placeholder]="'0'"
+      />
+    </div>
+
+    <div class="flex gap-2">
+      <button type="button" class="btn-secondary w-full md:w-1/2" (click)="closeDialog()"> Cancel </button>
+      <button type="submit" class="btn-primary w-full md:w-1/2">
+        @if (isLoading()) {
+          <ng-icon class="text-lg animate-spin mx-auto" name="lucideLoader" />
+        } @else {
+          Generate
+        }
+      </button>
+    </div>
+
+  </form>
+
+</p-dialog>

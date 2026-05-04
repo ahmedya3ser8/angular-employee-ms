@@ -1,0 +1,23 @@
+<section class="flex flex-col gap-8">
+
+  <app-page-header
+    [title]="role() === 'admin' ? 'Dashboard' : fullName"
+    [subTitle]="role() === 'admin' ? 'Welcome back, Admin — here\'s your overview' : description"
+  />
+
+  @if (isLoading()) {
+    <div class="flex justify-center items-center h-[60vh]">
+      <span class="loader"></span>
+    </div>
+  }
+  @else {
+    <app-dashboard-stats
+      [adminDashboardStats]="adminDashboardStats()"
+      [employeeDashboardStats]="employeeDashboardStats()"
+      [role]="role()"
+    />
+  }
+
+  <app-dashboard-actions />
+
+</section>

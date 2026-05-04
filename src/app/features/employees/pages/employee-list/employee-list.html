@@ -1,0 +1,47 @@
+<section class="flex flex-col gap-8">
+
+  <app-page-header
+    [title]="'Employees'"
+    [subTitle]="'Manage your team members'"
+    [showAction]="true"
+    [buttonText]="'Add Employee'"
+    [buttonLink]="'/employees/add'"
+  />
+
+  <div class="flex flex-col md:flex-row gap-3">
+
+    <div class="text-[#90A1B9] bg-[#f8fafc80] border border-[#E2E8F0] rounded-md py-4 pl-10 pr-4 flex-1 relative">
+      <ng-icon class="text-lg absolute left-4 top-1/2 -translate-y-1/2" name="lucideSearch" />
+      <input type="search" [(ngModel)]="employeeName" (input)="onSearch()" class="w-full outline-none" placeholder="Search employees..." />
+    </div>
+
+    <p-select
+      [options]="departments"
+      [(ngModel)]="selectedDepartment"
+      (onChange)="onDepartmentChange($event)"
+      optionLabel="label"
+      optionValue="value"
+      class="w-full md:w-56 bg-[#f8fafc80]! border border-[#E2E8F0]! items-center p-2"
+    />
+
+  </div>
+
+  @if (isLoading()) {
+    <div class="flex justify-center items-center h-[50vh]">
+      <span class="loader"></span>
+    </div>
+  }
+  @else {
+    <div class="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-5">
+      @for (employee of employees(); track employee._id) {
+        <app-employee-card
+          [employee]="employee"
+          (onDelete)="deleteEmployee(employee._id)"
+        />
+      } @empty {
+        <app-empty-state class="col-span-full" [message]="'No employees found'" />
+      }
+    </div>
+  }
+
+</section>

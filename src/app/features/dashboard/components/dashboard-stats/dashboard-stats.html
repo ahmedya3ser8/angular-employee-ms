@@ -1,0 +1,40 @@
+<div [class.2xl:grid-cols-4]="role() === 'admin'" class="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-5">
+  @if (role() === 'admin') {
+    <app-stats-card
+      title="Total Employees"
+      [value]="adminDashboardStats()?.totalEmployees!"
+      icon="lucideUsers"
+    />
+    <app-stats-card
+      title="Departments"
+      [value]="adminDashboardStats()?.totalDepartment!"
+      icon="lucideBuilding2"
+    />
+    <app-stats-card
+      title="Today's Attendance"
+      [value]="adminDashboardStats()?.todaysAttendance!"
+      icon="lucideCalendar"
+    />
+    <app-stats-card
+      title="Pending Leaves"
+      [value]="adminDashboardStats()?.pendingLeaves!"
+      icon="lucideFileText"
+    />
+  } @else {
+    <app-stats-card
+      title="Days Present"
+      [value]="employeeDashboardStats()?.daysPresent!"
+      icon="lucideCalendar"
+    />
+    <app-stats-card
+      title="Pending Leaves"
+      [value]="employeeDashboardStats()?.pendingLeaves!"
+      icon="lucideFileText"
+    />
+    <app-stats-card
+      title="Latest Payslip"
+      [value]="`$` + employeeDashboardStats()?.latestPayslip!"
+      icon="lucideDollarSign"
+    />
+  }
+</div>

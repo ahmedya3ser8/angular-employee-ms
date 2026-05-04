@@ -1,0 +1,46 @@
+<section class="flex flex-col gap-8">
+
+  @if (role() === 'admin') {
+    <app-page-header
+      [title]="'Leave Management'"
+      [subTitle]="'Manage leave applications'"
+    />
+  }
+  @else if (role() === 'employee') {
+    <app-page-header
+      [title]="'Leave Management'"
+      [subTitle]="'Your leave history and requests'"
+      [showAction]="true"
+      [buttonText]="'Apply for Leave'"
+      [type]="'modal'"
+      (openModal)="showDialog()"
+    />
+  }
+
+  @if (isLoading() && role() === 'employee') {
+    <div class="flex justify-center items-center h-[10vh]">
+      <span class="loader"></span>
+    </div>
+  }
+  @else {
+    <app-leave-stats
+      [role]="role()"
+      [leaveStats]="leaveStats()"
+    />
+  }
+
+  <app-data-table
+    [columns]="columns"
+    [data]="leaves()"
+    [isLoading]="isLoading()"
+    [action]="role() === 'admin' ? 'approve-reject' : null"
+    (onAction)="handleAction($event)"
+  />
+
+  <app-add-leave-dialog
+    [visible]="visible()"
+    (close)="closeDialog()"
+    (submitted)="onLeaveCreated()"
+  />
+
+</section>

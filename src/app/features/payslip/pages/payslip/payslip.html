@@ -1,0 +1,33 @@
+<section class="flex flex-col gap-8">
+
+  @if (role() === 'admin') {
+    <app-page-header
+      [title]="'Payslips'"
+      [subTitle]="'Generate and manage employee payslips'"
+      [showAction]="true"
+      [buttonText]="'Generate Payslip'"
+      [type]="'modal'"
+      (openModal)="showDialog()"
+    />
+  }
+  @else {
+    <app-page-header
+      [title]="'Payslips'"
+      [subTitle]="'Your payslip history'"
+    />
+  }
+
+  <app-data-table
+    [columns]="columns"
+    [action]="'download'"
+    [data]="payslips()"
+    [isLoading]="isLoading()"
+  />
+
+  <app-add-payslip-dialog
+    [visible]="visible()"
+    (close)="closeDialog()"
+    (submitted)="getPayslips()"
+  />
+
+</section>

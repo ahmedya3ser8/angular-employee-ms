@@ -1,0 +1,77 @@
+<p-dialog [modal]="true" [draggable]="false" [visible]="visible()" [style]="{ width: '28rem' }">
+
+  <ng-template #header>
+    <div class="space-y-0.5">
+      <h3 class="font-medium text-[#0F172B]"> Apply for Leave </h3>
+      <p class="text-sm text-slate-400"> Submit your leave request for approval </p>
+    </div>
+  </ng-template>
+
+  <form [formGroup]="leaveForm" (ngSubmit)="submitForm()" class="flex flex-col gap-5">
+
+    <div class="space-y-2">
+      <label for="leaveType" class="label"> Leave Type </label>
+      <p-select
+        id="leaveType"
+        [options]="['casual', 'annual', 'sick']"
+        formControlName="type"
+        class="w-full bg-[#f8fafc80]! border border-[#E2E8F0]! items-center p-1"
+      />
+      @if (leaveForm.get('type')?.errors && leaveForm.get('type')?.touched) {
+        @if (leaveForm.get('type')?.getError('required')) {
+          <p class="text-rose-500 text-sm lowercase"> leaveType is required </p>
+        }
+      }
+    </div>
+
+    <div class="space-y-2">
+      <h3 class="text-sm font-medium text-[#314158]"> Duration </h3>
+
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-5">
+        <div class="space-y-2">
+          <label for="startDate" class="label"> From </label>
+          <p-datepicker id="startDate" formControlName="startDate" [showIcon]="true" appendTo="body" class="w-full [&_.p-inputtext]:w-full"/>
+          @if (leaveForm.get('startDate')?.errors && leaveForm.get('startDate')?.touched) {
+            @if (leaveForm.get('startDate')?.getError('required')) {
+              <p class="text-rose-500 text-sm lowercase"> startDate is required </p>
+            }
+          }
+        </div>
+
+        <div class="space-y-2">
+          <label for="endDate" class="label"> To </label>
+          <p-datepicker id="endDate" formControlName="endDate" [showIcon]="true" appendTo="body" class="w-full [&_.p-inputtext]:w-full"/>
+          @if (leaveForm.get('endDate')?.errors && leaveForm.get('endDate')?.touched) {
+            @if (leaveForm.get('endDate')?.getError('required')) {
+              <p class="text-rose-500 text-sm lowercase"> endDate is required </p>
+            }
+          }
+        </div>
+      </div>
+
+    </div>
+
+    <div class="space-y-2">
+      <label for="reason" class="label"> Reason </label>
+      <textarea formControlName="reason" class="input h-25 resize-none" id="reason" placeholder="Briefly describe why you need this leave..."></textarea>
+      @if (leaveForm.get('reason')?.errors && leaveForm.get('reason')?.touched) {
+        @if (leaveForm.get('reason')?.getError('required')) {
+          <p class="text-rose-500 text-sm lowercase"> reason is required </p>
+        }
+      }
+    </div>
+
+    <div class="flex gap-2">
+      <button type="button" class="btn-secondary w-full md:w-1/2" (click)="closeDialog()"> Cancel </button>
+      <button type="submit" class="btn-primary w-full md:w-1/2">
+        @if (isLoading()) {
+          <ng-icon class="text-lg animate-spin mx-auto" name="lucideLoader" />
+        } @else {
+          Submit
+        }
+      </button>
+    </div>
+
+  </form>
+
+</p-dialog>

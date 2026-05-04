@@ -1,0 +1,37 @@
+<form [formGroup]="loginForm" (ngSubmit)="submitForm()" class="flex flex-col gap-6">
+
+  <app-input
+    [id]="'email'"
+    [type]="'email'"
+    [label]="'Email address'"
+    formControlName="email"
+    [control]="loginForm.get('email')"
+    [placeholder]="'john@example.com'"
+    [errors]="{
+      'required': 'email is required',
+      'email': 'Invalid email'
+    }"
+  />
+
+  <app-input
+    [id]="'password'"
+    [type]="'password'"
+    [label]="'Password'"
+    formControlName="password"
+    [control]="loginForm.get('password')"
+    [placeholder]="'********'"
+    [errors]="{
+      'required': 'password is required',
+      'minlength': 'Password must be at least 6 characters'
+    }"
+  />
+
+  <button type="submit" class="btn-primary">
+    @if (loading()) {
+      <ng-icon class="text-lg animate-spin mx-auto" name="lucideLoader" />
+    } @else {
+      Sign in
+    }
+  </button>
+
+</form>

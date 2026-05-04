@@ -1,0 +1,17 @@
+<div class="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-5">
+  <app-stats-card
+    title="Days Present"
+    [value]="attendanceStats().daysPresent"
+    icon="lucideCalendar"
+  />
+  <app-stats-card
+    title="Late Arrivals"
+    [value]="attendanceStats().lateArrivals"
+    icon="lucideAlertCircle"
+  />
+  <app-stats-card
+    title="Avg. Work Hrs"
+    [value]="attendanceStats().avgWorkHours + ' Hrs'"
+    icon="lucideClock"
+  />
+</div>

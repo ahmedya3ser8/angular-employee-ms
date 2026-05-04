@@ -1,0 +1,27 @@
+<section class="flex flex-col gap-10 justify-center h-full w-full max-w-md mx-auto max-sm:p-6">
+
+  <div class="space-y-2">
+    <h2 class="text-[#0F172B] font-medium text-3xl tracking-tighter">
+      Welcome Back
+    </h2>
+    <p class="text-[#62748E]">
+      Select your portal to securely access the system.
+    </p>
+  </div>
+
+  <div class="space-y-4">
+    <a routerLink="/auth/login/admin" class="bg-slate-50 border border-slate-200 rounded-lg flex justify-between items-center w-full p-6 transition-all duration-300 hover:bg-indigo-50 hover:border-indigo-400 cursor-pointer group">
+      <h3 class="text-[#1D293D] text-lg"> Admin Portal </h3>
+      <ng-icon name="lucideArrowRight" class="text-[#90A1B9] transition-all duration-300 group-hover:translate-x-2"/>
+    </a>
+    <a routerLink="/auth/login/employee" class="bg-slate-50 border border-slate-200 rounded-lg flex justify-between items-center w-full p-6 transition-all duration-300 hover:bg-indigo-50 hover:border-indigo-400 cursor-pointer group">
+      <h3 class="text-[#1D293D] text-lg"> Employee Portal  </h3>
+      <ng-icon name="lucideArrowRight" class="text-[#90A1B9] transition-all duration-300 group-hover:translate-x-2"/>
+    </a>
+  </div>
+
+  <p class="text-sm text-[#90A1B9]">
+    &copy; {{ fullYear }} Ahmed Yasser. All rights reserved.
+  </p>
+
+</section>

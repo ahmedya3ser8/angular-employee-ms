@@ -1,0 +1,23 @@
+::ng-deep .p-drawer {
+  border: none !important;
+}
+
+::ng-deep .p-drawer-header {
+  background: linear-gradient(to bottom, #0F172B, #0F172B, #020618) !important;
+  border-right: 1px solid rgba($color: #fff, $alpha: 0.4) !important;
+  color: #fff !important;
+  padding: 24px 20px !important;
+}
+
+::ng-deep .p-drawer-content {
+  padding: 0 !important;
+  background: linear-gradient(to bottom, #0F172B, #0F172B, #020618) !important;
+  border-right: 1px solid rgba($color: #fff, $alpha: 0.4) !important;
+  color: #fff !important;
+}
+
+::ng-deep .p-drawer-footer {
+  padding: 0 !important;
+  background: linear-gradient(to bottom, #0F172B, #0F172B, #020618) !important;
+  border-right: 1px solid rgba($color: #fff, $alpha: 0.4) !important;
+}

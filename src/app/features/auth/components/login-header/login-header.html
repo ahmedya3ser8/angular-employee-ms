@@ -1,0 +1,19 @@
+<div class="space-y-6">
+  <a routerLink='/auth/login' class="text-[#90A1B9] flex items-center gap-2 transition-all duration-300 hover:text-slate-700">
+    <ng-icon name="lucideArrowLeft" />
+    <p> Back to portals </p>
+  </a>
+
+  <div class="space-y-2">
+    <h3 class="text-[#27272A] font-medium text-3xl">
+      @if (role() === 'admin') {
+        Admin Portal
+      } @else {
+        Employee Portal
+      }
+    </h3>
+    <p class="text-[#62748E]">
+      Sign in to access your account
+    </p>
+  </div>
+</div>

@@ -1,0 +1,19 @@
+<section class="flex flex-col gap-8">
+
+  <app-page-header
+    [title]="'Profile'"
+    [subTitle]="'Manage your account and preferences'"
+  />
+
+  <app-profile-form />
+
+  <app-password-card
+    (changePassword)="showDialog()"
+  />
+
+  <app-change-password-dialog
+    [visible]="visible()"
+    (close)="closeDialog()"
+  />
+
+</section>

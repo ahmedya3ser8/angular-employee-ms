@@ -1,0 +1,225 @@
+<section class="flex flex-col gap-8">
+
+  <app-page-header
+    [title]="isEditMode() ? 'Edit Employee' : 'Add New Employee'"
+    [subTitle]="isEditMode() ? 'Update employee details' : 'Create a user account and employee profile'"
+  />
+
+  <form [formGroup]="employeeForm" (ngSubmit)="submitForm()" class="flex flex-col gap-8">
+
+    <div class="border border-slate-200 rounded-md p-6">
+
+      <h2 class="font-medium border-b border-slate-100 pb-5">
+        Personal Information
+      </h2>
+
+      <div class="flex flex-col gap-6 pt-5">
+
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-5">
+          <app-input
+            [id]="'firstName'"
+            [label]="'First Name'"
+            formControlName="firstName"
+            [control]="employeeForm.get('firstName')"
+            [placeholder]="'John'"
+            [errors]="{
+              'required': 'firstName is required',
+              'minlength': 'firstName must be at least 2 characters',
+              'maxlength': 'firstName must be at most 30 characters'
+            }"
+          />
+          <app-input
+            [id]="'lastName'"
+            [label]="'Last Name'"
+            formControlName="lastName"
+            [control]="employeeForm.get('lastName')"
+            [placeholder]="'Doe'"
+            [errors]="{
+              'required': 'lastName is required',
+              'minlength': 'lastName must be at least 2 characters',
+              'maxlength': 'lastName must be at most 30 characters'
+            }"
+          />
+        </div>
+
+        <app-input
+          [id]="'phoneNumber'"
+          [label]="'Phone Number'"
+          formControlName="phoneNumber"
+          [control]="employeeForm.get('phoneNumber')"
+          [placeholder]="'01023456789'"
+          [errors]="{
+            'required': 'phoneNumber is required',
+            'pattern': 'phoneNumber must start with 010, 011, 012, or 015 and be 11 digits'
+          }"
+        />
+
+        <div class="space-y-2">
+          <label for="bio" class="label"> Bio (Optional) </label>
+          <textarea formControlName="bio" class="input h-25 resize-none" id="bio" placeholder="Brief description..."></textarea>
+          @if (employeeForm.get('bio')?.errors && employeeForm.get('bio')?.touched) {
+            @if (employeeForm.get('bio')?.getError('maxlength')) {
+              <p class="text-rose-500 text-sm lowercase"> bio must not exceed 500 characters </p>
+            }
+          }
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="border border-slate-200 rounded-md p-6">
+
+      <h2 class="font-medium border-b border-slate-100 pb-5">
+        Employment Details
+      </h2>
+
+      <div class="flex flex-col gap-6 pt-5">
+
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-5">
+          <div class="space-y-2">
+            <label for="department" class="label"> Department </label>
+            <p-select
+              id="department"
+              [options]="departments"
+              formControlName="department"
+              optionLabel="label"
+              optionValue="value"
+              placeholder="Select Department"
+              class="w-full bg-[#f8fafc80]! border border-[#E2E8F0]! items-center p-1"
+            />
+            @if (employeeForm.get('department')?.errors && employeeForm.get('department')?.touched) {
+              @if (employeeForm.get('department')?.getError('required')) {
+                <p class="text-rose-500 text-sm lowercase"> department is required </p>
+              }
+            }
+          </div>
+          <app-input
+            [id]="'position'"
+            [label]="'Position'"
+            formControlName="position"
+            [control]="employeeForm.get('position')"
+            [placeholder]="'Marketing'"
+            [errors]="{
+              'required': 'position is required',
+              'minlength': 'position must be at least 2 characters',
+              'maxlength': 'position must be at most 30 characters'
+            }"
+          />
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-5">
+          <app-input
+            [id]="'basicSalary'"
+            [label]="'Basic Salary'"
+            [type]="'number'"
+            formControlName="basicSalary"
+            [control]="employeeForm.get('basicSalary')"
+            [placeholder]="'5000'"
+            [errors]="{
+              'required': 'basicSalary is required'
+            }"
+          />
+          <app-input
+            [id]="'allowances'"
+            [label]="'Allowances'"
+            [type]="'number'"
+            formControlName="allowances"
+            [control]="employeeForm.get('allowances')"
+            [placeholder]="'0'"
+          />
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-5">
+          <app-input
+            [id]="'deductions'"
+            [label]="'Deductions'"
+            [type]="'number'"
+            formControlName="deductions"
+            [control]="employeeForm.get('deductions')"
+            [placeholder]="'0'"
+          />
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="border border-slate-200 rounded-md p-6">
+
+      <h2 class="font-medium border-b border-slate-100 pb-5">
+        Account Setup
+      </h2>
+
+      <div class="flex flex-col gap-6 pt-5">
+
+        <app-input
+          [id]="'email'"
+          [label]="'Work Email'"
+          [type]="'email'"
+          formControlName="email"
+          [control]="employeeForm.get('email')"
+          [placeholder]="'john@gmail.com'"
+          [errors]="{
+            'required': 'email is required',
+            'email': 'invalid email address'
+          }"
+        />
+
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-5">
+          @if (!isEditMode()) {
+            <app-input
+              [id]="'password'"
+              [label]="'Temporary Password'"
+              [type]="'password'"
+              formControlName="password"
+              [control]="employeeForm.get('password')"
+              [placeholder]="'******'"
+              [errors]="{
+                'required': 'password is required',
+                'minlength': 'password must be at least 6 characters'
+              }"
+            />
+          }
+          <div class="space-y-2">
+            <label for="role" class="label"> System Role </label>
+            <p-select
+              id="role"
+              [options]="roles"
+              formControlName="role"
+              optionLabel="label"
+              optionValue="value"
+              class="w-full bg-[#f8fafc80]! border border-[#E2E8F0]! items-center p-1"
+            />
+            @if (employeeForm.get('role')?.errors && employeeForm.get('role')?.touched) {
+              @if (employeeForm.get('role')?.getError('required')) {
+                <p class="text-rose-500 text-sm lowercase"> role is required </p>
+              }
+            }
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="flex gap-3 items-center justify-end">
+      <a routerLink='/employees' class="btn-secondary">
+        Cancel
+      </a>
+      <button type="submit" class="btn-primary">
+        @if (isLoading()) {
+          <ng-icon class="text-lg animate-spin mx-auto" name="lucideLoader" />
+        } @else {
+          @if (isEditMode()) {
+            Update Employee
+          } @else {
+            Create Employee
+          }
+        }
+      </button>
+    </div>
+
+  </form>
+
+</section>

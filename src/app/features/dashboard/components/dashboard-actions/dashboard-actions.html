@@ -1,0 +1,11 @@
+@if (role() === 'employee') {
+  <div class="flex gap-4 items-center">
+    <a routerLink='/attendance' class="btn-primary flex items-center gap-2">
+      Mark Attendance
+      <ng-icon class="text-lg" name="lucideArrowRight" />
+    </a>
+    <a routerLink='/leave' class="btn-secondary">
+      Apply for Leave
+    </a>
+  </div>
+}

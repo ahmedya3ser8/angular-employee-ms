@@ -1,0 +1,22 @@
+<div class="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-5">
+  @if (role() === 'employee') {
+    <app-stats-card
+      title="Sick Leave"
+      [value]="leaveStats().sick"
+      [isLeave]="true"
+      icon="lucideThermometer"
+    />
+    <app-stats-card
+      title="Casual Leave"
+      [value]="leaveStats().casual"
+      [isLeave]="true"
+      icon="lucideUmbrella"
+    />
+    <app-stats-card
+      title="Annual Leave"
+      [value]="leaveStats().annual"
+      [isLeave]="true"
+      icon="lucideTreePalm"
+    />
+  }
+</div>

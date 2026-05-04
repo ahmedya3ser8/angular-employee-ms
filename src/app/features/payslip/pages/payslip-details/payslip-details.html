@@ -1,0 +1,103 @@
+<section>
+
+  <div id="print-section" class="max-w-2xl mx-auto bg-white space-y-8 p-8">
+
+    <div class="space-y-1 text-center border-b border-slate-200 pb-5">
+      <h1 class="text-2xl font-bold text-slate-900 tracking-tight uppercase"> PAYSLIP </h1>
+      <p class="text-sm text-slate-500">
+        {{ payslip().month | date: 'MMMM' }}
+        {{ payslip().year }}
+      </p>
+    </div>
+
+    <div class="grid grid-cols-2 gap-5">
+      <div class="space-y-1">
+        <h3 class="text-sm text-slate-400 uppercase tracking-wider">
+          Employee Name
+        </h3>
+        <p class="text-slate-900 font-semibold capitalize">
+          {{ payslip().employee.firstName }}
+          {{ payslip().employee.lastName }}
+        </p>
+      </div>
+      <div class="space-y-1">
+        <h3 class="text-sm text-slate-400 uppercase tracking-wider">
+          Position
+        </h3>
+        <p class="text-slate-900 font-semibold capitalize">
+          {{ payslip().employee.position }}
+        </p>
+      </div>
+      <div class="space-y-1">
+        <h3 class="text-sm text-slate-400 uppercase tracking-wider">
+          Email
+        </h3>
+        <p class="text-slate-900 font-semibold">
+          {{ payslip().employee.user.email }}
+        </p>
+      </div>
+      <div class="space-y-1">
+        <h3 class="text-sm text-slate-400 uppercase tracking-wider">
+          Period
+        </h3>
+        <p class="text-slate-900 font-semibold capitalize">
+          {{ payslip().month | date: 'MMMM' }}
+          {{ payslip().year }}
+        </p>
+      </div>
+    </div>
+
+    <div class="w-full overflow-x-auto border border-slate-200 rounded-md shadow-sm">
+      <table class="w-full">
+        <thead>
+          <tr class="border-b border-slate-200 text-[#62748E] bg-slate-50 text-xs uppercase">
+            <th class="p-3 text-left"> Description </th>
+            <th class="p-3 text-right"> Amount </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="border-b border-slate-200 text-[#62748E] text-sm transition-all duration-300 hover:bg-slate-50 last:border-none">
+            <td class="p-3 text-slate-700 capitalize">
+              Basic Salary
+            </td>
+            <td class="p-3 text-slate-900 capitalize font-medium text-right">
+              ${{ payslip().basicSalary }}
+            </td>
+          </tr>
+          <tr class="border-b border-slate-200 text-[#62748E] text-sm transition-all duration-300 hover:bg-slate-50 last:border-none">
+            <td class="p-3 text-slate-700 capitalize">
+              Allowances
+            </td>
+            <td class="p-3 text-slate-900 capitalize font-medium text-right">
+              + ${{ payslip().allowances }}
+            </td>
+          </tr>
+          <tr class="text-[#62748E] text-sm transition-all duration-300 hover:bg-slate-50 last:border-none">
+            <td class="p-3 text-slate-700 capitalize">
+              Deductions
+            </td>
+            <td class="p-3 text-slate-900 capitalize font-medium text-right">
+              - ${{ payslip().deductions }}
+            </td>
+          </tr>
+        </tbody>
+        <tfoot>
+          <tr class="text-[#62748E] bg-slate-100 text-sm">
+            <th class="p-3 text-left text-slate-900 font-bold">
+              Net Salary
+            </th>
+            <th class="p-3 text-right text-base text-slate-900 font-bold">
+              ${{ payslip().netSalary }}
+            </th>
+          </tr>
+        </tfoot>
+      </table>
+    </div>
+
+  </div>
+
+  <button (click)="print()" class="btn-primary block mx-auto">
+    Print Payslip
+  </button>
+
+</section>

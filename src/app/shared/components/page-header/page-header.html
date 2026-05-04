@@ -1,0 +1,29 @@
+<div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+
+  <div class="space-y-1">
+
+    <h1 class="text-2xl font-medium text-[#0F172B]">
+      {{ title() }}
+    </h1>
+
+    <p class="text-sm text-[#62748E]">
+      {{ subTitle() }}
+    </p>
+
+  </div>
+
+  @if (showAction()) {
+    @if (type() === 'link') {
+      <a [routerLink]='buttonLink()' class="max-md:w-50 flex items-center gap-2 btn-primary">
+        <ng-icon class="text-lg" name="lucidePlus" />
+        {{ buttonText() }}
+      </a>
+    } @else {
+      <button (click)="openModal.emit()" class="max-md:w-50 flex items-center gap-2 btn-primary">
+        <ng-icon class="text-lg" name="lucidePlus" />
+        {{ buttonText() }}
+      </button>
+    }
+  }
+
+</div>

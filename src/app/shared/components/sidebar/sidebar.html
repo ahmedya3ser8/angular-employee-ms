@@ -1,0 +1,107 @@
+<div class="sidebar w-65 h-full bg-linear-to-b from-[#0F172B] via-[#0F172B] to-[#020618] border-r border-white/4 text-white hidden md:flex flex-col">
+
+  <div class="flex items-center gap-3 py-6 px-5 border-b border-white/6">
+    <ng-icon class="text-[28px]" name="lucideUser" />
+    <div>
+      <h3 class="text-sm font-semibold"> Employee MS </h3>
+      <p class="text-xs font-medium text-[#62748E]"> Management System </p>
+    </div>
+  </div>
+
+  <div class="bg-[#171E32] flex items-center gap-3 py-4 px-3 rounded-md mx-3 mt-4 border border-white/4">
+    <div class="size-9 rounded-md bg-[#1E2A3E] flex justify-center items-center text-[#90A1B9] font-semibold text-xs uppercase">
+      {{ employee()?.firstName?.[0] }}
+    </div>
+    <div>
+      <h3 class="text-sm font-medium capitalize">
+        {{ employee()?.firstName }} {{ employee()?.lastName }}
+      </h3>
+      <p class="text-xs text-[#62748E] capitalize">
+        {{ employee()?.user?.role }}
+      </p>
+    </div>
+  </div>
+
+  <ul class="px-3 space-y-1 flex-1 overflow-y-auto mt-5">
+    @for (item of menuItemsFiltered(); track item.link) {
+      <li>
+        <a [routerLink]="item.link" routerLinkActive="bg-[#615FFF1F] text-[#A3B3FF]" #rla="routerLinkActive" class='flex items-center gap-3 py-2.5 px-3 rounded-md cursor-pointer relative transition-all duration-300 text-[#CAD5E2] hover:text-white hover:bg-white/4'>
+          @if (rla.isActive) {
+            <div class="absolute left-0 bg-[#615FFF] w-1 h-5 rounded-tr-2xl rounded-br-2xl"></div>
+          }
+          <ng-icon class="text-lg" [name]="item.icon" />
+          <span class="flex-1 text-sm font-medium"> {{item.label}} </span>
+          @if (rla.isActive) {
+            <ng-icon name="lucideChevronRight" />
+          }
+        </a>
+      </li>
+    }
+  </ul>
+
+  <button (click)="logout()" class="flex items-center gap-3 text-[#90A1B9] px-4 py-6 border-t border-white/6 transition-all duration-300 hover:text-rose-400 cursor-pointer">
+    <ng-icon class="text-lg" name="lucideLogOut" />
+    <span class="text-sm font-medium"> Log out </span>
+  </button>
+
+</div>
+
+<button (click)="openDrawer()" class="absolute top-4 left-4 cursor-pointer md:hidden">
+  <ng-icon class="text-2xl" name="lucideMenu" />
+</button>
+
+<p-drawer [(visible)]="visible">
+
+  <ng-template #header>
+    <div class="flex items-center gap-3">
+      <ng-icon class="text-[28px]" name="lucideUser" />
+      <div>
+        <h3 class="text-sm font-semibold"> Employee MS </h3>
+        <p class="text-xs font-medium text-[#62748E]"> Management System </p>
+      </div>
+    </div>
+  </ng-template>
+
+  <div class="space-y-5">
+
+    <div class="bg-[#171E32] flex items-center gap-3 py-4 px-3 rounded-md mx-3 border mt-4 border-white/4">
+      <div class="size-9 rounded-md bg-[#1E2A3E] flex justify-center items-center text-[#90A1B9] font-semibold text-xs uppercase">
+        {{ employee()?.firstName?.[0] }}
+      </div>
+      <div>
+        <h3 class="text-sm font-medium capitalize">
+          {{ employee()?.firstName }} {{ employee()?.lastName }}
+        </h3>
+        <p class="text-xs text-[#62748E] capitalize">
+          {{ employee()?.user?.role }}
+        </p>
+      </div>
+    </div>
+
+    <ul class="px-3 space-y-1">
+      @for (item of menuItemsFiltered(); track item.link) {
+        <li>
+          <a [routerLink]="item.link" routerLinkActive="bg-[#615FFF1F] text-[#A3B3FF]" #rla="routerLinkActive" class='flex items-center gap-3 py-2.5 px-3 rounded-md cursor-pointer relative transition-all duration-300 text-[#CAD5E2] hover:text-white hover:bg-white/4'>
+            @if (rla.isActive) {
+              <div class="absolute left-0 bg-[#615FFF] w-1 h-5 rounded-tr-2xl rounded-br-2xl"></div>
+            }
+            <ng-icon class="text-lg" [name]="item.icon" />
+            <span class="flex-1 text-sm font-medium"> {{item.label}} </span>
+            @if (rla.isActive) {
+              <ng-icon name="lucideChevronRight" />
+            }
+          </a>
+        </li>
+      }
+    </ul>
+
+  </div>
+
+  <ng-template #footer>
+    <button (click)="logout()" class="flex items-center gap-3 text-[#90A1B9] px-4 py-6 border-t border-white/6 transition-all duration-300 hover:text-rose-400 cursor-pointer">
+      <ng-icon class="text-lg" name="lucideLogOut" />
+      <span class="text-sm font-medium"> Log out </span>
+    </button>
+  </ng-template>
+
+</p-drawer>

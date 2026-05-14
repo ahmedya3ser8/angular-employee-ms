@@ -33,8 +33,6 @@ export class EmployeeList implements OnInit {
   selectedDepartment: string = '';
   employeeName: string = '';
 
-  totalEmplyee: number = 0;
-
   ngOnInit(): void {
     this.getEmployees();
     this.listenToEmployeeSearch();

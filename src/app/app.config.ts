@@ -1,15 +1,15 @@
 import { APP_INITIALIZER, ApplicationConfig, provideBrowserGlobalErrorListeners, provideZoneChangeDetection } from '@angular/core';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
-
+import { provideHttpClient, withFetch } from '@angular/common/http';
 import { provideRouter, withInMemoryScrolling } from '@angular/router';
 
 import { routes } from './app.routes';
 
-import { provideHttpClient, withFetch } from '@angular/common/http';
 import Aura from '@primeuix/themes/aura';
 import { providePrimeNG } from 'primeng/config';
-import { AuthService } from './features/auth/services/auth';
 import { ConfirmationService, MessageService } from 'primeng/api';
+
+import { AuthService } from './features/auth/services/auth';
 import { provideAppIcons } from './core/config/icons.config';
 
 export function initAuth(auth: AuthService) {

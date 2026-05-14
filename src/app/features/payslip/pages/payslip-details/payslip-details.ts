@@ -13,7 +13,6 @@ import { IPayslip } from '../../models/payslip';
 export class PayslipDetails implements OnInit {
   private readonly activatedRoute = inject(ActivatedRoute);
 
-  payslipId: WritableSignal<string> = signal('');
   payslip: WritableSignal<IPayslip> = signal({} as IPayslip);
 
   ngOnInit(): void {

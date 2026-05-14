@@ -117,7 +117,8 @@
             [control]="employeeForm.get('basicSalary')"
             [placeholder]="'5000'"
             [errors]="{
-              'required': 'basicSalary is required'
+              'required': 'basicSalary is required',
+              'min': 'basicSalary must be postive'
             }"
           />
           <app-input

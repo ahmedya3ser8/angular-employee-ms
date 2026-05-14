@@ -1,4 +1,4 @@
 export const environment = {
-  baseURL: 'http://localhost:3000/api'
+  baseURL: 'https://employee-ms-v1.vercel.app/api'
 };
 

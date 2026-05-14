@@ -31,10 +31,17 @@ export class LoginForm implements OnInit {
   }
 
   initForm(): void {
-    this.loginForm = this.fb.group({
-      email: ['', globalValidator.email],
-      password: ['', globalValidator.password]
-    })
+    if (this.role() === 'admin') {
+      this.loginForm = this.fb.group({
+        email: ['admin@gmail.com', globalValidator.email],
+        password: ['123456', globalValidator.password]
+      })
+    } else {
+      this.loginForm = this.fb.group({
+        email: ['omarali@gmail.com', globalValidator.email],
+        password: ['P@ssw0rd', globalValidator.password]
+      })
+    }
   }
 
   submitForm(): void {

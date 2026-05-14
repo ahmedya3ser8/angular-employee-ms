@@ -1,5 +1,5 @@
 import { Component, DestroyRef, inject, OnInit, signal, WritableSignal } from '@angular/core';
-import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ActivatedRoute, Router, RouterLink } from "@angular/router";
 
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
@@ -10,7 +10,7 @@ import { Input } from "../../../../shared/components/input/input";
 import { PageHeader } from "../../../../shared/components/page-header/page-header";
 import { DEPARTMENTS } from '../../../../shared/constants/department';
 import { globalValidator } from '../../../../shared/helpers/global-validators';
-import { IUpdateEmployeeFormData } from '../../models/employee';
+import { IEmployee, IUpdateEmployeeFormData } from '../../models/employee';
 import { EmployeeService } from '../../services/employee';
 
 @Component({
